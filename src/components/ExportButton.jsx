@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ExportButton = ({ table }) => {
-  const handleExport = () => {
-    const blob = new Blob([JSON.stringify(table, null, 2)], {
-      type: 'application/json',
-    });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${table.name}.json`;
-    link.click();
-  };
+    const [isExporting, setIsExporting] = useState(false);
 
-  return (
-    <button className="btn btn-sm btn-outline-secondary" onClick={handleExport}>
-      Export JSON
-    </button>
-  );
+    const handleExport = (e) => {
+        e.stopPropagation();
+        setIsExporting(true);
+        setTimeout(() => setIsExporting(false), 2000);
+    };
+
+    return (
+        <button
+            onClick={handleExport}
+            disabled={isExporting}
+            className="btn export-btn d-flex align-items-center gap-2"
+        >
+            <i className={`bi ${isExporting ? 'bi-arrow-repeat' : 'bi-download'} ${isExporting ? 'spin' : ''}`}></i>
+            {isExporting ? 'Exporting...' : 'Export'}
+        </button>
+    );
 };
 
 export default ExportButton;
