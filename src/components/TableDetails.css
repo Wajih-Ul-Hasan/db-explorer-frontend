@@ -1,0 +1,17 @@
+.fade-in {
+  animation: fadeIn 0.4s ease-in;
+}
+
+body.dark-mode .table {
+  background-color: #343a40;
+  color: #ffffff;
+}
+
+body.dark-mode .table-light thead {
+  background-color: #495057;
+  color: #e9ecef;
+}
+
+input.form-control:focus {
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+}
